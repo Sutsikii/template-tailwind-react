@@ -1,9 +1,53 @@
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { Navbar } from "./components/Navbar";
+import { Contact } from "./pages/Contact";
+import { Home } from "./pages/Home";
+import { Portfolio } from "./pages/Portfolio";
+
 function App() {
+
+  const Layout = () =>{
+    return(
+      <div className="app">
+        <Navbar/>
+        <Outlet/>
+      </div>
+    )
+  }
+
+  const router = createBrowserRouter([
+    {
+      path:"/",
+      element:<Layout/>,
+      children:[
+        {
+          path:"/",
+          element:<Home/>,
+        },
+        {
+          path:"/Contact",
+          element:<Contact/>,
+        },
+        {
+          path:"/Portfolio",
+          element:<Portfolio/>,
+        },
+        {
+          //Page de fallback
+          path:"*",
+          element:fallback(),
+        }
+      ]
+    },
+  ])
+
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold text-center">Tailwind</h1>
+    <div>
+      <RouterProvider router={router} />
     </div>
   );
 }
+
+const fallback = () => <Home />; // Fallback Page
 
 export default App;
