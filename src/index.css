@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+
     body{
-        @apply bg-body text-white;
+        @apply bg-body text-white flex flex-col;
     }
+    
 }
